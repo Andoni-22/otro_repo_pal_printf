@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: afiat-ar <afiat-ar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/07/21 11:23:13 by afiat-ar          #+#    #+#             */
+/*   Updated: 2021/07/21 11:23:13 by afiat-ar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 /*
@@ -7,19 +19,25 @@
 static t_print	*ft_init_struct(t_print *tab)
 {
 	tab->zero = 0;
+	tab->minus = 0;
+	tab->pnt = 0;
 	tab->tl = 0;
 	tab->sign = 0;
 	tab->pad = 0;
 	tab->sp = 0;
+	tab->wdt = 0;
 	return (tab);
 }
 
 t_print	*ft_reset_struct(t_print *tab)
 {
 	tab->zero = 0;
+	tab->minus = 0;
+	tab->pnt = 0;
 	tab->sign = 0;
 	tab->pad = 0;
 	tab->sp = 0;
+	tab->wdt = 0;
 	return (tab);
 }
 

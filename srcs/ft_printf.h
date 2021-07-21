@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: afiat-ar <afiat-ar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/07/21 11:24:01 by afiat-ar          #+#    #+#             */
+/*   Updated: 2021/07/21 11:24:01 by afiat-ar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
@@ -24,25 +36,38 @@ typedef struct s_print
 {
 	va_list	args;
 	int		zero;
+	int		minus;
+	int		pnt;
 	int		tl;
 	int		sign;
 	int		pad;
 	int		sp;
+	int		wdt;
 }	t_print;
 
 int	ft_printf(const char *format, ...);
 t_print	*ft_reset_struct(t_print *tab);
+
 int		ft_check_flags(t_print *tab, int i, const char *format);
 int		ft_check_print_type(t_print *tab, int i, const char *format);
+
 void	ft_putunsignednbr_tab(t_print *tab);
 void	ft_putnbr_tab(t_print *tab);
 void	ft_putstr_tab(t_print *tab);
 void	ft_putchar_tab(t_print *tab);
+
 void	ft_output_pointer(t_print *tab);
 void	ft_write_null_p(t_print *tab);
 int		ft_numlen_base(unsigned long n, int base);
 char	*ft_itoa_base(char *str, unsigned long n, int base, int c);
 int		ft_putnbr_base(unsigned long n, char *base);
 void	ft_puthexa_tab(t_print *tab, int c);
+
+int		ft_eval_zero(t_print *tab, const char *format, int i);
+int		ft_eval_minus(t_print *tab, const char *format, int i);
+int		ft_eval_pnt(t_print *tab, const char *format, int i);
+int		ft_eval_pad(t_print *tab, const char *format, int i);
+int		ft_eval_sign(t_print *tab, const char *format, int i);
+int		ft_eval_sp(t_print *tab, const char *format, int i);
 
 #endif

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_check_flags.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: afiat-ar <afiat-ar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/07/21 11:24:05 by afiat-ar          #+#    #+#             */
+/*   Updated: 2021/07/21 11:24:05 by afiat-ar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 static int	ft_get_tl(int i, char const *format)
@@ -25,18 +37,22 @@ static int	ft_is_flag(t_print *tab, int i, const char *format)
 	{
 		i++;
 		if (format[i] == '0')
-			tab->zero = 1;
+			i = ft_eval_zero(tab, format, i);
+		if (format[i] == '-')
+			i = ft_eval_minus(tab, format, i);
+		if (format[i] == '.')
+			i = ft_eval_pnt(tab, format, i);
 		if (format[i] == '#')
-			tab->pad = 1;
+			i = ft_eval_pad(tab, format, i);
 		if (format[i] == '+')
-			tab->sign = 1;
+			i = ft_eval_sign(tab, format, i);
 		if (format[i] == ' ')
-			tab->sp = 1;
+			i = ft_eval_sp(tab, format, i);
 	}
 	return (i);
 }
 
-static int	ft_analyze_flag(t_print *tab, int i, const char *format)
+/*static int	ft_analyze_flag(t_print *tab, int i, const char *format)
 {
 	if (tab->zero == 1 || tab->sp == 1)
 	{
@@ -53,7 +69,7 @@ static int	ft_analyze_flag(t_print *tab, int i, const char *format)
 	if (tab->pad == 1)
 		i = ft_check_pad_print(tab, i, format);
 	return (i);
-}
+}*/
 
 /**
 **	This method call function ft_is_flag, if this
@@ -65,7 +81,7 @@ int	ft_check_flags(t_print *tab, int i, const char *format)
 {
 	while (!(ft_isalpha(format[i]) || format[i] == '%'))
 	{
-		//i = ft_is_flag(tab, i, format);
+		i = ft_is_flag(tab, i, format);
 		i++;
 	}
 	i = ft_check_print_type(tab, i, format);
